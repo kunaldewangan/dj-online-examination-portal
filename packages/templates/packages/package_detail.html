@@ -1,0 +1,12 @@
+{% extends 'packages/package_base.html' %}
+
+{% block package_list %}
+<div class="col-md-12">
+    <h1>Package Details:</h1>
+    <h1>{{object.name}}</h1>
+
+    <button><a href="{% url 'tests:test' package_id=object.id %}">test</a></button>
+    <button><a href="{% url 'packages:user_package_result' package_id=object.id %}">result</a></button>
+    
+</div>
+{% endblock %}
