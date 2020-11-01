@@ -1,0 +1,23 @@
+{% extends 'packages/package_base.html' %}
+
+{% block package_list %}
+<div class="col-md-12">
+
+    <h1>All My Packages:</h1>
+    {% for package in package_list %}
+    
+    <div class="m-2 p-2">
+        <h4>Package name:
+            <a href="{% url 'packages:package_detail' pk=package.id %}">{{package}}</a>
+        </h4>
+    
+        <a href="{% url 'packages:leave' package_id=package.id %}">
+            <button class="btn btn-warning">
+                Leave
+            </button>
+        </a>
+    </div>
+    
+    {% endfor %}
+</div>
+{% endblock %}
