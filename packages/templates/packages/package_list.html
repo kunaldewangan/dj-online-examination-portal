@@ -1,0 +1,24 @@
+{% extends 'packages/package_base.html' %}
+
+{% block package_list %}
+<div class="col-md-12">
+
+    <h1>All Packages:</h1>
+    {% for package in package_list %}
+    <h1>{{package}}</h1>
+    {% if user in package.participants.all %}
+    <a href="{% url 'packages:leave' package_id=package.id %}">
+        <button class="btn btn-warning">
+            Leave
+        </button>
+    </a>
+    {% else %}
+    <a href="{% url 'packages:participate' package_id=package.id %}">
+        <button class="btn btn-primary">
+            Participate
+        </button>
+    </a>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
