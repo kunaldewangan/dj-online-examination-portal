@@ -4,7 +4,7 @@ from django.contrib import auth
 
 class Package(models.Model):
     name = models.CharField(verbose_name='Package Name',max_length=250)
-    description = models.TextField()
+    description = models.TextField(default='')
     visibility = models.BooleanField(verbose_name='Package visible?',default=False)
     no_of_Q = models.IntegerField(verbose_name='Total No. Of Questions')
     q_visibility = models.BooleanField(verbose_name='Question visible?',default=False,help_text='click if you want to show Questions')
@@ -12,11 +12,15 @@ class Package(models.Model):
     participants = models.ManyToManyField(auth.get_user_model(),through='PackageStudent')
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    duration = models.DurationField(verbose_name='Test Duration',help_text='Format HH:MM:SS')
+    duration = models.DurationField(verbose_name='Test Duration',help_text='Format HH:MM:SS',blank=True,null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs): 
+        self.duration = self.end_time - self.start_time
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['start_time']
