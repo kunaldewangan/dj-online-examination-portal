@@ -1,24 +1,81 @@
 {% extends 'packages/package_base.html' %}
 
 {% block package_list %}
+<html>
+    <head>
+        <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 50%;
+          margin-top: 100px ;
+          margin-left: 300px ;
+        }
+        
+        td, th {
+          
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        th {
+          background-color: #4CAF50;
+          color: white;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        tr:hover {background-color: #ffffff;}
+        </style>
+        <!-- bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+           
+        </head>
+        <body>
 <div class="col-md-12">
 
-    <h1>All Packages:</h1>
-    {% for package in package_list %}
-    <h1>{{package}}</h1>
-    {% if user in package.participants.all %}
-    <a href="{% url 'packages:leave' package_id=package.id %}">
-        <button class="btn btn-warning">
-            Leave
-        </button>
-    </a>
-    {% else %}
-    <a href="{% url 'packages:participate' package_id=package.id %}">
-        <button class="btn btn-primary">
-            Participate
-        </button>
-    </a>
-    {% endif %}
-    {% endfor %}
+   <h1>All Packages:</h1>
+    
+
+    <table>
+        <tr>
+          <th>Package</th>
+          <th>Start Time</th>
+          <th>Duration</th>
+          <th>Action</th>
+        </tr>
+        {% for package in package_list %}
+        <tr>
+      
+          <td>{{package}}</td>
+          <td>{{package.start_time}}</td>
+          <td>{{package.duration}}</td>
+          <td>
+            {% if user in package.participants.all %}
+          <a href="{% url 'packages:leave' package_id=package.id %}">
+           <center>  <button class="btn btn-outline-warning">
+                  Leave
+              </button> </center>
+          </a>
+          {% else %}
+          <center>  <a href="{% url 'packages:participate' package_id=package.id %}">
+             <button class="btn btn-outline-primary">
+                  Participate 
+              </button>
+          </a> </center> 
+      
+      
+          {% endif %}
+          
+          </td>
+        </tr>
+        {% endfor %}
+
+
+
 </div>
+ </div> 
+ </body>
+ </html>
 {% endblock %}
