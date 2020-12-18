@@ -1,4 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>Successfully submitted</h1>
+<div class="container">
+<div class="row">
+    <div class="col-md-6">
+        <img class="img-fluid" src="{% static 'images/submit.png' %}" alt="submit">
+    </div>
+    <div class="col-md-6">
+        <div class="text-center pt-3">
+            <h4 class="display-4">Successfully submitted!</h4>
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock %}

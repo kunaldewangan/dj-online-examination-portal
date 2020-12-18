@@ -1,4 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>You are Not permitted to access this test</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid" src="{% static 'images/404.gif' %}" alt="404">
+        </div>
+        <div class="col-md-6">
+            <div class="text-center pt-3">
+                <h4 class="display-4">You are not permitted</h4>
+            </div>
+        </div>
+    </div>
+    </div>
+    
 {% endblock %}
