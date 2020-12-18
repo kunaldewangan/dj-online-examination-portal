@@ -1,4 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>welcome to index page</h1>
+<div class="container">
+    <!-- <div class="jumbotron jumbotron-fluid">
+       
+        <center> <h1 class="display-4">Welcome to Online Test!</h1></center>
+        </div> -->
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid" src="{% static 'images/welcome.gif' %}" alt="welcome">
+        </div>
+        <div class="col-md-6">
+            <h5 class="display-4">Ready to give test?</h5>
+        </div>
+    </div>
+</div>
 {% endblock %}

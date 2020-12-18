@@ -1,17 +1,36 @@
 {% extends 'packages/package_base.html' %}
-
+{% load static %}
 {% block package_list %}
-<div class="col-md-12">
-    <span>Test Will Start In: <span id='start'>        
-    </span></span>
-    <h1>Package Details:</h1>
-    <h3>Package Name: {{object.name}}</h3>
-    <p>Package Description: {{object.description}}</p>
 
-    <button id='test-button'>
-        <a href="#" id='test-href'>test</a>
-    </button>
-    <button><a href="{% url 'packages:user_package_result' package_id=object.id %}">result</a></button>
+<div class="col-md-6">
+    <img class="img-fluid" src="{% static 'images/exam.gif' %}" alt="package-detail">
+</div>
+
+<div class="col-md-6 pt-5">
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <center><h5>Package Detail</h5></center>
+        </li>
+        <li class="list-group-item">
+            <span style="color:red">Test Will Start In: <span id='start'>
+            </span></span>
+        </li>
+        <li class="list-group-item">
+            <span>Package Name: <strong>{{object.name}}</strong></span>
+        </li>
+        <li class="list-group-item">
+            <p>Package Description: {{object.description}}</p>
+        </li>
+        
+        <li class="list-group-item">
+            <button id='test-button' type="button" class="btn btn-primary"><a class="btn btn-primary" href="#"
+                    id='test-href'>test</a></button>
+            <button type="button" class="btn btn-success"><a class="btn btn-success"
+                    href="{% url 'packages:user_package_result' package_id=object.id %}">result</a></button>
+
+
+        </li>
+    </ul>
     
 </div>
 {% endblock %}
@@ -19,24 +38,24 @@
 {% block script %}
 <script>
     var start_date = new Date("{{start_date}}").getTime();
-    var x = setInterval(function() {
-    var now = new Date().getTime(); 
-    var t = start_date - now;
-    var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
-    var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
-    var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
-    var seconds = Math.floor((t % (1000 * 60)) / 1000); 
-    document.getElementById("start").innerHTML = days + "d " 
-    + hours + "h " + minutes + "m " + seconds + "s "; 
-    document.getElementById("test-button").style.display="none";
-    // console.log('start time is:'+hours);
-        if (t < 0) { 
-            clearInterval(x); 
-            document.getElementById("start").innerHTML = "Time is started"; 
+    var x = setInterval(function () {
+        var now = new Date().getTime();
+        var t = start_date - now;
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((t % (1000 * 60)) / 1000);
+        document.getElementById("start").innerHTML = days + "d "
+            + hours + "h " + minutes + "m " + seconds + "s ";
+        document.getElementById("test-button").style.display = "none";
+        // console.log('start time is:'+hours);
+        if (t < 0) {
+            clearInterval(x);
+            document.getElementById("start").innerHTML = "Time is started";
             document.getElementById("test-button").style.display = "block";
-            document.getElementById('test-href').href="{% url 'tests:test' package_id=object.id %}";
-        } 
+            document.getElementById('test-href').href = "{% url 'tests:test' package_id=object.id %}";
+        }
     }, 1000); 
-    </script> 
-    
+</script>
+
 {% endblock %}

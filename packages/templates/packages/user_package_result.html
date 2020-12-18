@@ -1,6 +1,21 @@
 {% extends 'packages/package_base.html' %}
+{% load static %}
 {% block package_list %}
-<div class="col-md-12">
-    <h1>Your Marks is:{{result}}</h1>
+<div class="col-md-8">
+    <img class="img-fluid" src="{% static 'images/result.png' %}" alt="result">
+</div>
+<div class="col-md-4">
+    <div class="pt-5 text-center">
+
+        <ul class="list-group">
+            <li class="list-group-item active">
+                <h4 class="display-4">Score Card</h4>
+            </li>
+            <li class="list-group-item">
+                <h5>Your marks is: <strong>{{result}}</strong></h5>
+            </li>
+        </ul>
+    </div>
+    
 </div>
 {% endblock %}
