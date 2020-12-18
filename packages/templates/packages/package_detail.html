@@ -1,21 +1,37 @@
 {% extends 'packages/package_base.html' %}
-
+{% load static %}
 {% block package_list %}
-<div class="col-md-12">
-    <div class="jumbotron">
-        <span style="color:red">Test Will Start In: <span id='start'>
+
+<div class="col-md-6">
+    <img class="img-fluid" src="{% static 'images/exam.gif' %}" alt="package-detail">
+</div>
+
+<div class="col-md-6 pt-5">
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <center><h5>Package Detail</h5></center>
+        </li>
+        <li class="list-group-item">
+            <span style="color:red">Test Will Start In: <span id='start'>
             </span></span>
-        <h3>Package Details:</h3>
-        <h1>Package Name: <strong>{{object.name}}</strong></h1>
-        <p>Package Description: {{object.description}}</p>
+        </li>
+        <li class="list-group-item">
+            <span>Package Name: <strong>{{object.name}}</strong></span>
+        </li>
+        <li class="list-group-item">
+            <p>Package Description: {{object.description}}</p>
+        </li>
+        
+        <li class="list-group-item">
+            <button id='test-button' type="button" class="btn btn-primary"><a class="btn btn-primary" href="#"
+                    id='test-href'>test</a></button>
+            <button type="button" class="btn btn-success"><a class="btn btn-success"
+                    href="{% url 'packages:user_package_result' package_id=object.id %}">result</a></button>
 
 
-        <button id='test-button' type="button" class="btn btn-primary"><a class="btn btn-primary" href="#" id='test-href'>test</a></button>
-        <button type="button" class="btn btn-success"><a class="btn btn-success" href="{% url 'packages:user_package_result' package_id=object.id %}">result</a></button>
-
+        </li>
+    </ul>
     
-
-    </div>
 </div>
 {% endblock %}
 

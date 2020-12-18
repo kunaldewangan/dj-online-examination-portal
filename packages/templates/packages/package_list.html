@@ -1,44 +1,58 @@
 {% extends 'packages/package_base.html' %}
-
+{% load static %}
 {% block package_list %}
 <html>
-    <head>
-        <style>
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 50%;
-          margin-top: 100px ;
-          margin-left: 300px ;
-        }
-        
-        td, th {
-          
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
-        }
-        th {
-          background-color: #4CAF50;
-          color: white;
-        }
-        
-        tr:nth-child(even) {
-          background-color: #dddddd;
-        }
-        tr:hover {background-color: #ffffff;}
-        </style>
-        <!-- bootstrap-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-           
-        </head>
-        <body>
-<div class="col-md-12">
 
-   <h1>All Packages:</h1>
-    
+  <head>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 30px;
+        /* margin-left: 300px ; */
+      }
 
-    <table>
+      td,
+      th {
+
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+
+      tr:hover {
+        background-color: #ffffff;
+      }
+
+    </style>
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+
+    <div class="col-md-6">
+      <img class="img-fluid" src="{% static 'images/all-package.png' %}" alt="all-package">
+    </div>
+
+    <div class="col-md-6">
+
+      <center><h1>All Packages:</h1></center>
+
+
+      <table>
         <tr>
           <th>Package</th>
           <th>Start Time</th>
@@ -47,35 +61,36 @@
         </tr>
         {% for package in package_list %}
         <tr>
-      
+
           <td>{{package}}</td>
           <td>{{package.start_time}}</td>
           <td>{{package.duration}}</td>
           <td>
             {% if user in package.participants.all %}
-          <a href="{% url 'packages:leave' package_id=package.id %}">
-           <center>  <button class="btn btn-outline-warning">
+            <a href="{% url 'packages:leave' package_id=package.id %}">
+              <center> <button class="btn btn-outline-warning">
                   Leave
-              </button> </center>
-          </a>
-          {% else %}
-          <center>  <a href="{% url 'packages:participate' package_id=package.id %}">
-             <button class="btn btn-outline-primary">
-                  Participate 
-              </button>
-          </a> </center> 
-      
-      
-          {% endif %}
-          
+                </button> </center>
+            </a>
+            {% else %}
+            <center> <a href="{% url 'packages:participate' package_id=package.id %}">
+                <button class="btn btn-outline-primary">
+                  Participate
+                </button>
+              </a> </center>
+
+
+            {% endif %}
+
           </td>
         </tr>
         {% endfor %}
 
 
 
-</div>
- </div> 
- </body>
- </html>
+    </div>
+    </div>
+  </body>
+
+</html>
 {% endblock %}
